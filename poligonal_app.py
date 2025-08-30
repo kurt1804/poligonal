@@ -289,7 +289,9 @@ st.write("**Complete la entrada exactamente como el cuadro del PDF (orden PQ, QA
 
 df_in = pd.DataFrame(ejemplo, columns=cols)
 df_in = st.data_editor(
-    df_in, use_container_width=True, num_rows="fixed",
+    df_in,
+    use_container_width=True,
+    num_rows="dynamic",  # ← ahora puedes agregar y quitar filas con el botón “+”
     column_config={
         "EST.- PV.": st.column_config.TextColumn(width="small"),
         "Ángulo (DMS)": st.column_config.TextColumn(help="Ángulo a la derecha (DMS)"),
@@ -303,6 +305,7 @@ df_in = st.data_editor(
     },
     key="entrada",
 )
+
 
 try:
     tabla, tot = build_results(df_in, sec_dec=sec_dec, K=Kconst, reduce_by_v=reduce_v)
